@@ -38,7 +38,7 @@
 	{
 		"type": "file",
 		"source": "packer/files/sample-app.service",
-		"destination": "/etc/systemd/system/sample-app.service"
+		"destination": "/tmp/sample-app.service"
 	},
 	{
 		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
