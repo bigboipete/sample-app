@@ -1,0 +1,53 @@
+{
+    "variables": {
+		"packer-client-id": "{{env `PACKER_CLIENT_ID`}}",
+		"packer-client-secret": "{{env `PACKER_CLIENT_SECRET`}}",
+		"packer-subscription-id": "{{env `PACKER_SUBSCRIPTION_ID`}}",
+		"packer-tenant-id": "{{env `PACKER_TENANT_ID`}}",
+		"packer-location": "{{env `PACKER_LOCATION`}}",
+		"packer-object-id": "{{env `PACKER_OBJECT_ID`}}",
+		"install-java-path": "scripts/install-java.sh"
+	},
+	
+	"builders": [{
+		"type": "azure-arm",
+
+		"client_id": "{{ user `packer-client-id` }}",
+		"client_secret": "{{ user `packer-client-secret` }}",
+		"subscription_id": "{{ user `packer-subscription-id` }}",
+		"tenant_id": "{{ user `packer-tenant-id`}}",
+		"object_id": "{{ user `packer-object-id` }}",
+
+		"managed_image_name": "packer_image_java8_kVM",
+		"managed_image_resource_group_name": "jambitiac",
+		
+		"os_type": "Linux",
+		"image_publisher": "Canonical",
+		"image_offer": "UbuntuServer",
+		"image_sku": "16.04-DAILY-LTS",
+
+		"location": "{{ user `packer-location` }}",
+		"vm_size": "Standard_A0"
+	}],
+	
+	"provisioners": [{
+		"type": "file",
+		"source": "../target/gs-spring-boot-0.1.0.jar",
+		"destination": "/tmp/gs-spring-boot.jar"
+    },
+	{
+		"type": "file",
+		"source": "files/sample-app.service"
+		"destination": "/etc/systemd/system/sample-app.service"
+	},
+	{
+		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+		"scripts": [
+			"scripts/install-java.sh",
+			"scripts/deploy.sh",
+			"scripts/deprovision.sh"
+	],
+		"inline_shebang": "/bin/sh -x",
+		"type": "shell"
+	}]
+}	
