@@ -2,19 +2,19 @@
 
 mkdir /var/gs-spring-boot/
 mv /tmp/gs-spring-boot.jar /var/gs-spring-boot/
-useradd spring-boot
+useradd jambitadmin
 chown spring-boot:spring-boot /var/gs-spring-boot/gs-spring-boot.jar
 cat <<EOF > /etc/systemd/system/sample-app.service;
 [Unit]
 Description=gs-spring-boot
 After=syslog.target
 [Service]
-User=spring-boot
+User=jambitadmin
 ExecStart=/var/gs-spring-boot/gs-spring-boot.jar
 SuccessExitStatus=143
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl enable gs-spring-boot.service
+systemctl enable sample-app.service
 
-mv /tmp/sample-app.service /etc/systemd/system/sample-app.service
+# mv /tmp/sample-app.service /etc/systemd/system/sample-app.service
