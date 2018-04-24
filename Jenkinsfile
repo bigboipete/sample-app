@@ -21,6 +21,7 @@ pipeline {
 			steps {
 				wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
 					sh "${PACKER_HOME}/packer validate packer/packer.json"
+					sh "${PACKER_HOME}/packer build packer/packer.json"
 				}
 			}
 		}
