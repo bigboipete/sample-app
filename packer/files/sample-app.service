@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User=jambitadmin
-ExecStart=/usr/bin/java -jar /var/sample-app/sample-app.jar
+ExecStart=/usr/bin/java -jar /var/gs-spring-boot/gs-spring-boot.jar
 SuccessExitStatus=143
 
 [Install]
