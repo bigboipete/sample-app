@@ -18,7 +18,7 @@
 		"tenant_id": "{{ user `packer-tenant-id`}}",
 		"object_id": "{{ user `packer-object-id` }}",
 
-		"managed_image_name": "packer_image_java8_kVM",
+		"managed_image_name": "konsch_j8_packer_image",
 		"managed_image_resource_group_name": "jambitiac",
 		
 		"os_type": "Linux",
