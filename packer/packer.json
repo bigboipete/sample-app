@@ -37,7 +37,7 @@
     },
 	{
 		"type": "file",
-		"source": "files/sample-app.service"
+		"source": "files/sample-app.service",
 		"destination": "/etc/systemd/system/sample-app.service"
 	},
 	{
