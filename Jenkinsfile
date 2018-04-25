@@ -35,9 +35,11 @@ pipeline {
 				ARM_ENVIRONMENT="public"
 			}
 			steps {
-				sh "${TERRAFORM_HOME}/terraform init"
-				sh "${TERRAFORM_HOME}/terraform plan -out vm-lb-plan"
-				sh "${TERRAFORM_HOME}/terraform apply vm-lb-plan"
+				dir('terraform') {
+					sh "${TERRAFORM_HOME}/terraform init"
+					sh "${TERRAFORM_HOME}/terraform plan -out vm-lb-plan"
+					sh "${TERRAFORM_HOME}/terraform apply vm-lb-plan"
+				}
 			}
 		}
 	}
