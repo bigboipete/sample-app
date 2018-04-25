@@ -16,5 +16,3 @@ SuccessExitStatus=143
 WantedBy=multi-user.target
 EOF
 systemctl enable sample-app.service
-
-# mv /tmp/sample-app.service /etc/systemd/system/sample-app.service
